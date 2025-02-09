@@ -1,0 +1,43 @@
+name: CI/CD for Vite React App
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4  
+      - name: Set base path for Vite
+        run: echo "VITE_BASE_PATH=/rick-and-morty-character-search/" >> $GITHUB_ENV
+      - uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.5.0
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build project
+        run: pnpm run build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./dist
