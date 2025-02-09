@@ -24,13 +24,13 @@ export default function Card({ character }: CardProps) {
         <h5 className={""}>
           Status:{" "}
           <span
-            className={
-              "font-montserrat-bold" + character.status === "Alive"
+            className={`font-montserrat-bold ${
+              character.status === "Alive"
                 ? "text-primary-green"
                 : character.status === "Dead"
                 ? "text-primary-red"
                 : "text-amber-300"
-            }
+            } `}
           >
             {character.status}
           </span>
