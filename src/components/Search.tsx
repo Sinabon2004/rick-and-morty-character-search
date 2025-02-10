@@ -1,35 +1,16 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { Character } from "../types";
-import fetchCharacters from "../utils/api";
-import { useDebounce } from "../hooks/useDebounce";
+import {  useEffect, useRef } from "react";
 
 interface SearchProps {
-  onCharactersUpdate: (characters: Character[] | null) => void;
+  count: number;
+  onQueryUpdate: (query: string) => void;
 }
 
-export default function Search({ onCharactersUpdate }: SearchProps) {
-  const [query, setQuery] = useState<string>("");
-  const [count, setCount] = useState<number>(0);
+export default function Search({ count, onQueryUpdate }: SearchProps) {
+  
   const searchRef = useRef<HTMLInputElement>(null);
-  const debouncedQuery = useCallback(() => {
-    if (query.length > 3) {
-      let charactersCount = 0;
-      fetchCharacters(query)
-        .then((characters) => {
-          onCharactersUpdate(characters.results);
-          charactersCount = characters.info.count;
-          console.log(charactersCount);
-        })
-        .catch(() => {
-          onCharactersUpdate(null);
-        })
-        .finally(() => {
-          setCount(charactersCount);
-        });
-    }
-  }, [query]);
-
-  useDebounce({ callbackFn: debouncedQuery, ms: 500 });
+  
+  
+  
 
   useEffect(() => {
     if (searchRef.current) {
@@ -46,7 +27,7 @@ export default function Search({ onCharactersUpdate }: SearchProps) {
       >
         <input
           ref={searchRef}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => e.target.value.length >3 && onQueryUpdate(e.target.value)}
           className={
             "font-fira-bold text-sm sm:text-md  text-primary-purple placeholder:text-primary-purple \
             px-[15px] sm:px-[25px] py-[10px] sm:py-[20px] \
