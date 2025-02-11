@@ -6,10 +6,11 @@ export default async function fetchCharacters(
   page?: number 
 ): Promise<CharactersRequest> {
   try {
+    const params = new URLSearchParams();
+    if (name) params.append("name", name);
+    if (page) params.append("page", page.toString());
     const res = await axios.get<CharactersRequest>(
-      `https://rickandmortyapi.com/api/character?${name && "name=" + name}&${
-        page && ("page=" + page)
-      }`
+      `https://rickandmortyapi.com/api/character?${params.toString()}`
     );
     return res.data;
   } catch (error) {
