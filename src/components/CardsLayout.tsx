@@ -1,6 +1,5 @@
 import { Character } from "../types";
 import Card from "./Card";
-import Skeleton from "./Skeleton";
 
 export default function CardsLayout({
   characters,
@@ -12,9 +11,13 @@ export default function CardsLayout({
   return (
     <div className={"grid grid-cols-6 gap-2"}>
       {characters &&
-          characters.map((character) => (
-            <Card isLoading={isLoading} key={character.id} character={character} />
-          ))}
+        characters.map((character) => (
+          <Card
+            isLoading={isLoading}
+            key={character.id}
+            character={character}
+          />
+        ))}
     </div>
   );
 }

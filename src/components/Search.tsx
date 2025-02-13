@@ -1,4 +1,4 @@
-import {  useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface SearchProps {
   count: number;
@@ -6,11 +6,7 @@ interface SearchProps {
 }
 
 export default function Search({ count, onQueryUpdate }: SearchProps) {
-  
   const searchRef = useRef<HTMLInputElement>(null);
-  
-  
-  
 
   useEffect(() => {
     if (searchRef.current) {
@@ -27,7 +23,9 @@ export default function Search({ count, onQueryUpdate }: SearchProps) {
       >
         <input
           ref={searchRef}
-          onChange={(e) => e.target.value.length >3 && onQueryUpdate(e.target.value)}
+          onChange={(e) =>
+            e.target.value.length > 3 && onQueryUpdate(e.target.value)
+          }
           className={
             "font-fira-bold text-sm sm:text-md  text-primary-purple placeholder:text-primary-purple \
             px-[15px] sm:px-[25px] py-[10px] sm:py-[20px] \
@@ -37,7 +35,9 @@ export default function Search({ count, onQueryUpdate }: SearchProps) {
           type="text"
           placeholder="Search characters..."
         />
-        <span className={"pl-1 sm:pl-3 font-montserrat-regular text-xs sm:text-sm"}>
+        <span
+          className={"pl-1 sm:pl-3 font-montserrat-regular text-xs sm:text-sm"}
+        >
           Found characters: {count}
         </span>
       </div>

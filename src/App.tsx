@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import CardsLayout from "./components/CardsLayout";
 import Search from "./components/Search";
-import { Character, CharactersRequest } from "./types";
+import { CharactersRequest } from "./types";
 import { Pagination } from "./components/Pagination";
 import fetchCharacters from "./utils/api";
 import { useDebounce } from "./hooks/useDebounce";
@@ -12,7 +12,6 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [query, setQuery] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
 
   const debouncedQuery = useDebounce({ callbackFn: query, ms: 500 });
 
@@ -33,17 +32,15 @@ export default function App() {
         setIsLoading(false);
       });
   }, [debouncedQuery, currentPage]);
-  useEffect(()=>{
-    fetchAndSetCharacters()
-  }, [fetchAndSetCharacters])
-  
+  useEffect(() => {
+    fetchAndSetCharacters();
+  }, [fetchAndSetCharacters]);
 
   const handleQuery = (query: string) => {
     setQuery(query);
   };
 
   const handlePage = (page: number) => {
-    
     setCurrentPage(page);
   };
 
@@ -53,11 +50,13 @@ export default function App() {
       {characters?.results ? (
         <CardsLayout isLoading={isLoading} characters={characters.results} />
       ) : (
-        <div className='flex w-full justify-center items-center'>
-          <h3 className={"font-fira-regular "}>
-            По вашему запросу ничего не найдено
-          </h3>
-        </div>
+        query && (
+          <div className="flex w-full justify-center items-center">
+            <h3 className={"font-fira-regular "}>
+              По вашему запросу ничего не найдено
+            </h3>
+          </div>
+        )
       )}
       {characters?.info?.pages && characters.info.pages > 1 && (
         <Pagination

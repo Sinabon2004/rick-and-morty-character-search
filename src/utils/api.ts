@@ -3,7 +3,7 @@ import { CharactersRequest } from "../types";
 
 export default async function fetchCharacters(
   name: string,
-  page?: number 
+  page?: number
 ): Promise<CharactersRequest> {
   try {
     const params = new URLSearchParams();
