@@ -7,10 +7,10 @@ export default function CardsLayout({
   characters: Character[] | null;
 }) {
   return (
-    <div className={"grid grid-cols-6 gap-2"}>
+    <div className="grid grid-cols-6 gap-2">
       {characters &&
         characters.map((character) => (
-          <Card  key={character.id} character={character} />
+          <Card key={character.id} character={character} />
         ))}
     </div>
   );
