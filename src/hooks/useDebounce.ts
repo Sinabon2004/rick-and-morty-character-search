@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 
 interface debounce {
-  callbackFn: () => void;
+  callbackFn: string;
   ms: number;
 }
 
 export function useDebounce({ callbackFn, ms }: debounce) {
-    const [debounceVal, setDebounceVal] = useState<()=> void>(callbackFn);
+    const [debounceVal, setDebounceVal] = useState<string>(callbackFn);
     useEffect(()=>{
       const timeout = setTimeout(()=>{
         setDebounceVal(callbackFn)

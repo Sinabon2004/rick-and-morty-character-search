@@ -2,6 +2,7 @@ import { Character } from './index.d';
 import { ReactElement } from 'react'
 
 export interface CardProps {
+    isLoading: boolean;
     character: Character
 }
 

@@ -1,9 +1,17 @@
 import { CardProps } from "../types";
+import Skeleton from './Skeleton'
 
-export default function Card({ character }: CardProps) {
+export default function Card({ character, isLoading }: CardProps) {
   const formattedDate = new Date(character.created)
     .toLocaleDateString()
     .replace(/\//g, ".");
+
+    if(isLoading){
+      return (
+        <Skeleton/>
+      )
+    }
+
   return (
     <a
       href={character.url}

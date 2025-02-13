@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CardsLayout from "./components/CardsLayout";
 import Search from "./components/Search";
 import { Character, CharactersRequest } from "./types";
@@ -13,7 +13,10 @@ export default function App() {
   const [query, setQuery] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const debouncedQuery = useCallback(() => {
+
+  const debouncedQuery = useDebounce({ callbackFn: query, ms: 500 });
+
+  const fetchAndSetCharacters = useCallback(() => {
     if (query.length <= 3) return;
     let charactersCount = 0;
     setIsLoading(true);
@@ -29,25 +32,33 @@ export default function App() {
         setCount(charactersCount);
         setIsLoading(false);
       });
-  }, [query, currentPage]);
-  useDebounce({ callbackFn: debouncedQuery, ms: 500 });
+  }, [debouncedQuery, currentPage]);
+  useEffect(()=>{
+    fetchAndSetCharacters()
+  }, [fetchAndSetCharacters])
+  
 
   const handleQuery = (query: string) => {
     setQuery(query);
   };
 
   const handlePage = (page: number) => {
+    
     setCurrentPage(page);
   };
 
   return (
     <div className="container pt-8 sm:pt-16 flex flex-col gap-4 sm:gap-8">
       <Search count={count} onQueryUpdate={handleQuery} />
-      {isLoading
-        ? "skeleton"
-        : characters?.results && (
-            <CardsLayout characters={characters.results} />
-          )}
+      {characters?.results ? (
+        <CardsLayout isLoading={isLoading} characters={characters.results} />
+      ) : (
+        <div className='flex w-full justify-center items-center'>
+          <h3 className={"font-fira-regular "}>
+            По вашему запросу ничего не найдено
+          </h3>
+        </div>
+      )}
       {characters?.info?.pages && characters.info.pages > 1 && (
         <Pagination
           currentPage={currentPage}
