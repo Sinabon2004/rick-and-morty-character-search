@@ -8,7 +8,6 @@ export default async function fetchCharacters(
     const res = await axios.get<CharactersRequest>(
       `https://rickandmortyapi.com/api/character?name=${query}`
     );
-    console.log(res.data.info)
     return res.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

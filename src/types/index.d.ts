@@ -1,6 +1,3 @@
-import { Character } from './index.d';
-import { ReactElement } from 'react'
-
 export interface CardProps {
     character: Character
 }
@@ -25,8 +22,8 @@ export interface Character {
     species: string;
     type: string;
     gender: string;
-    origin: Origin;
-    location: Location;
+    origin: LocationInfo;
+    location: LocationInfo;
     image: string;
     episode: string[];
     url: string;
@@ -34,12 +31,8 @@ export interface Character {
 
 }
 
-interface Origin {
-    name: string;
-    link: string;
-}
 
-interface Location {
+interface LocationInfo {
     name: string;
-    link: string;
+    url: string;
 }
