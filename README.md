@@ -7,4 +7,4 @@
 
 ### Пагинация
 
-В условии отсутствовала информация о пагинации, поэтому вынес её логику в отдельную ветку [https://github.com/Sinabon2004/rick-and-morty-character-search/tree/feature/pagination](тык)
+В условии отсутствовала информация о пагинации, поэтому вынес её логику в отдельную ветку [тык](https://github.com/Sinabon2004/rick-and-morty-character-search/tree/feature/pagination)
