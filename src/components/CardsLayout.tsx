@@ -9,14 +9,16 @@ export default function CardsLayout({
   isLoading: boolean;
 }) {
   return (
-    <div className={"grid grid-cols-6 gap-2"}>
+    <div className="grid grid-cols-6 gap-2">
       {characters &&
         characters.map((character) => (
+
           <Card
             isLoading={isLoading}
             key={character.id}
             character={character}
           />
+
         ))}
     </div>
   );

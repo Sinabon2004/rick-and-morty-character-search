@@ -1,3 +1,4 @@
+
 import { Character } from "./index.d";
 import { ReactElement } from "react";
 
@@ -19,6 +20,7 @@ interface ApiInfo {
 }
 
 export interface Character {
+
   id: number;
   name: string;
   status: "Alive" | "Dead" | "unknown";
@@ -37,3 +39,4 @@ interface LocationInfo {
   name: string;
   url: string;
 }
+

@@ -8,6 +8,7 @@ interface SearchProps {
 export default function Search({ count, onQueryUpdate }: SearchProps) {
   const searchRef = useRef<HTMLInputElement>(null);
 
+
   useEffect(() => {
     if (searchRef.current) {
       searchRef.current.focus();
@@ -15,14 +16,11 @@ export default function Search({ count, onQueryUpdate }: SearchProps) {
   }, []);
 
   return (
-    <div className={"w-full flex justify-center "}>
-      <div
-        className={
-          "w-full max-w-full lg:max-w-[600px] flex flex-col gap-1 sm:gap-2 justify-start "
-        }
-      >
+    <div className="w-full flex justify-center">
+      <div className="w-full max-w-full lg:max-w-[600px] flex flex-col gap-1 sm:gap-2 justify-start">
         <input
           ref={searchRef}
+
           onChange={(e) =>
             e.target.value.length > 3 && onQueryUpdate(e.target.value)
           }
@@ -38,6 +36,7 @@ export default function Search({ count, onQueryUpdate }: SearchProps) {
         <span
           className={"pl-1 sm:pl-3 font-montserrat-regular text-xs sm:text-sm"}
         >
+
           Found characters: {count}
         </span>
       </div>

@@ -7,6 +7,7 @@ import fetchCharacters from "./utils/api";
 import { useDebounce } from "./hooks/useDebounce";
 
 export default function App() {
+
   const [characters, setCharacters] = useState<CharactersRequest | null>(null);
   const [count, setCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -65,6 +66,7 @@ export default function App() {
           onPageChange={handlePage}
         />
       )}
+
     </div>
   );
 }
